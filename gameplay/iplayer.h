@@ -5,10 +5,10 @@
 #ifndef RINGAME_IPLAYER_H
 #define RINGAME_IPLAYER_H
 
-#include "icard.h"
-
-// deque >>>>>> vector, but i forget
 #include <deque>
+#include <string>
+
+#include "icard.h"
 
 class IPlayer
 {

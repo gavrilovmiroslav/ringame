@@ -3,8 +3,9 @@
 #include "core/ringbuffer.h"
 #include <cassert>
 
-#include "gameplay/cardbase.h"
+#include "gameplay/impl/cardbase.h"
 #include "gameplay/gamecontext.h"
+#include "gameplay/effects/doubletotalstrengtheffect.h"
 #include "gameplay/impl/humanplayer.h"
 
 int main() {
@@ -26,7 +27,7 @@ int main() {
     // some of these come from the game (draw and resolve), and some come from the cards (strength up)
 
     GameContext gameContext{2};
-    gameContext.AddPlayer(new HumanPlayer("A", { new CardBase(1), new CardBase(3) }));
+    gameContext.AddPlayer(new HumanPlayer("A", { new CardBase(1), new CardBase(1, new DoubleTotalStrengthEffect()) }));
     gameContext.AddPlayer(new HumanPlayer("B", { new CardBase(2) }));
 
     gameContext.Run();

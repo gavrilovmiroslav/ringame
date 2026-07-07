@@ -5,13 +5,15 @@
 #ifndef RINGAME_CARDBASE_H
 #define RINGAME_CARDBASE_H
 
-#include "icard.h"
+#include "../icard.h"
+
+class IEffect;
 
 class CardBase : public ICard
 {
 public:
-    CardBase(int strength);
-    CardBase(IPlayer* owner, int strength);
+    CardBase(int strength, IEffect* effect = nullptr);
+    CardBase(IPlayer* owner, int strength, IEffect* effect = nullptr);
     ~CardBase() override = default;
 
     IPlayer* GetOwner() override;
@@ -20,6 +22,7 @@ public:
 
 private:
     IPlayer* m_Owner;
+    IEffect* m_Effect;
 };
 
 #endif //RINGAME_CARDBASE_H

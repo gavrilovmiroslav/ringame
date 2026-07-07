@@ -15,10 +15,12 @@ add_executable(ringame main.cpp
         gameplay/impl/humanplayer.h
         gameplay/effects/performplayerturneffect.cpp
         gameplay/effects/performplayerturneffect.h
-        gameplay/cardbase.cpp
-        gameplay/cardbase.h
+        gameplay/impl/cardbase.cpp
+        gameplay/impl/cardbase.h
         gameplay/effects/strengthupeffect.cpp
         gameplay/effects/strengthupeffect.h
         gameplay/effects/gameoverifemptyeffect.cpp
         gameplay/effects/gameoverifemptyeffect.h
+        gameplay/effects/doubletotalstrengtheffect.cpp
+        gameplay/effects/doubletotalstrengtheffect.h
 )

@@ -19,6 +19,7 @@ public:
 
     virtual ~IEffect() = default;
 
+    void SetOwner(ICard* card) { m_Owner = card; }
     ICard* GetOwner() { return m_Owner; }
     virtual void Apply(GameContext* context) = 0;
 
