@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 4.2)
 project(ringame)
 
 set(CMAKE_CXX_STANDARD 23)
+
+find_package(SDL3 REQUIRED)
+
 add_executable(ringame main.cpp
         core/ringbuffer.cpp
         core/ringbuffer.h
@@ -33,4 +36,8 @@ add_executable(ringame main.cpp
         gameplay/ecardresolutionbehavior.h
         gameplay/effects/spawntrapeffect.cpp
         core/random.h
+        engine/appstate.cpp
+        engine/appstate.h
 )
+
+target_link_libraries(ringame PRIVATE SDL3::SDL3)
