@@ -33,6 +33,11 @@ public:
         m_Elements.insert(m_Elements.begin() + m_Current + 1, element);
     }
 
+    void Clear()
+    {
+        m_Elements.clear();
+    }
+
     bool IsEmpty() const
     {
         return m_Elements.empty();

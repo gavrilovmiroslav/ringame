@@ -18,12 +18,12 @@ void MillDiscardEffect::Apply(GameContext *context)
             if (!discard.empty())
             {
                 auto* card = discard.back();
-                std::cout << "Removing one card (" << card->GetName() << ") from " << other->GetName() << "'s discard pile.";
+                std::cout << "Removing one card (" << card->GetName() << ") from " << other->GetName() << "'s discard pile." << std::endl;
                 discard.pop_back();
             }
             else
             {
-                std::cout << "" << other->GetName() << "'s discard is empty, can't discard.";
+                std::cout << "" << other->GetName() << "'s discard is empty, can't discard." << std::endl;
             }
         }
     }

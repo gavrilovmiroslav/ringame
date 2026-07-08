@@ -2,6 +2,8 @@
 // Created by mika on 7/7/26.
 //
 
+#include <print>
+
 #include "gamecontext.h"
 #include "iplayer.h"
 #include "effects/gameoverifemptyeffect.h"
@@ -39,13 +41,42 @@ void GameContext::Advance()
     }
 }
 
-void GameContext::Run()
+void GameContext::Round()
 {
     m_State.Push(new PerformPlayerTurnEffect());
     m_State.Push(new PerformPlayerTurnEffect());
     m_State.Push(new GameOverIfEmptyEffect());
+
     while (!IsGameOver())
     {
         Advance();
+    }
+}
+
+void GameContext::Run()
+{
+    for (int i = 0; i < 3; i++)
+    {
+        m_State.Clear();
+        std::cout << "\n================== ROUND " << (i + 1) << " / 3 ======================" << std::endl;
+        for (auto& player : m_Players)
+        {
+            player->ShuffleDeck();
+        }
+        Round();
+
+        m_IsGameOver = false;
+        for (auto& player : m_Players)
+        {
+            player->ShuffleDiscardIntoDeck();
+        }
+
+        std::cout << "\n --------------------- ROUND " << (i + 1) << " ENDED! ------------------" << std::endl;
+        std::print("    {:20}{:20}{:20}\n", "Player Name", "Total Strength", "Deck Size");
+        for (auto& player : m_Players)
+        {
+            std::print("    {:20}{:14}{:15}\n", player->GetName(), player->GetTotalStrength(), player->GetDeck().size());
+        }
+        std::cout << " -------------------------------------------------------\n" << std::endl;
     }
 }

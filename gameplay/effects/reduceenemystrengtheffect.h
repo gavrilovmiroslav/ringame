@@ -11,7 +11,10 @@
 
 struct ReduceEnemyStrengthEffect : public IEffect
 {
-    ReduceEnemyStrengthEffect() = default;
+    ReduceEnemyStrengthEffect() : IEffect()
+    {
+        m_Consumable = true;
+    }
     ~ReduceEnemyStrengthEffect() override = default;
     void Apply(GameContext* context) override;
 

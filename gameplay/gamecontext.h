@@ -86,6 +86,7 @@ public:
     }
 
     void Advance();
+    void Round();
     void Run();
 
 private:

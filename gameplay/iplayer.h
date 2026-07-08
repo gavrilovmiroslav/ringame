@@ -5,7 +5,9 @@
 #ifndef RINGAME_IPLAYER_H
 #define RINGAME_IPLAYER_H
 
+#include <algorithm>
 #include <deque>
+#include <random>
 #include <string>
 
 #include "icard.h"
@@ -23,6 +25,16 @@ public:
     std::deque<ICard*>& GetDiscard()
     {
         return m_Discard;
+    }
+
+    int GetVictoryPoints() const
+    {
+        return m_VictoryPoints;
+    }
+
+    void GainVictoryPoint()
+    {
+        m_VictoryPoints++;
     }
 
     int GetTotalStrength() const
@@ -52,6 +64,22 @@ public:
         m_Discard.push_back(card);
     }
 
+    void ShuffleDeck()
+    {
+        std::shuffle(GetDeck().begin(), GetDeck().end(), std::mt19937(std::random_device()()));
+    }
+
+    void ShuffleDiscardIntoDeck()
+    {
+        while (!GetDiscard().empty())
+        {
+            ICard* card = GetDiscard().back();
+            GetDiscard().pop_back();
+            GetDeck().push_back(card);
+        }
+        ShuffleDeck();
+    }
+
     [[nodiscard]] std::string_view GetName() const
     {
         return m_Name;
@@ -62,6 +90,7 @@ protected:
     std::deque<ICard*> m_Deck;
     std::deque<ICard*> m_Discard;
     int m_TotalStrength = 0;
+    int m_VictoryPoints = 0;
 };
 
 

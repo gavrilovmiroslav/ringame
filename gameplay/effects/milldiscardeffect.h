@@ -11,7 +11,10 @@
 
 struct MillDiscardEffect : public IEffect
 {
-    MillDiscardEffect() = default;
+    MillDiscardEffect() : IEffect()
+    {
+        m_Consumable = true;
+    }
     ~MillDiscardEffect() override = default;
     void Apply(GameContext* context) override;
 

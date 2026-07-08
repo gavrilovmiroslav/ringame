@@ -11,20 +11,10 @@
 void GameOverIfEmptyEffect::Apply(GameContext *context)
 {
     bool done = true;
-    std::string_view name = "";
-    int max = 0;
     for (const auto& player : context->GetPlayers())
     {
-        if (player->GetTotalStrength() > max)
-        {
-            max = player->GetTotalStrength();
-            name = player->GetName();
-        }
-
         if (!player->GetDeck().empty())
         {
-            std::cout << "Player " << player->GetName() << " still has cards to draw!" << std::endl;
-            context->Print("Game Over If Empty State");
             done = false;
             break;
         }
@@ -32,8 +22,7 @@ void GameOverIfEmptyEffect::Apply(GameContext *context)
 
     if (done)
     {
-        std::cout << "Game is finished - both decks are empty!" << std::endl;
-        std::cout << "The winner is " << name << " with " << max << " strength!" << std::endl;
+        std::cout << "The round is finished - both decks are empty!" << std::endl;
         context->GameOver();
     }
 
