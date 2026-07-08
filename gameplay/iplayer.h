@@ -15,7 +15,12 @@
 class IPlayer
 {
 public:
-    virtual ~IPlayer() {};
+    virtual ~IPlayer() {}
+
+    void ResetStrength()
+    {
+        m_TotalStrength = 0;
+    }
 
     std::deque<ICard*>& GetDeck()
     {

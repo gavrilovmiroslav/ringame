@@ -12,6 +12,6 @@
 void OneMoreTurnEffect::Apply(GameContext *context)
 {
     context->NextPlayer();
-    std::cout << context->GetCurrentPlayer()->GetName() << " gets to play one more turn!" << std::endl;
+    std::cout << "[ " << this->GetOwner()->GetName() << " ] " << context->GetCurrentPlayer()->GetName() << " gets to play one more turn!" << std::endl;
     context->Consume();
 }

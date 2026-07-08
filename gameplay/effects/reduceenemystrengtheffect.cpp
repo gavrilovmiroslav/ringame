@@ -23,7 +23,7 @@ void ReduceEnemyStrengthEffect::Apply(GameContext *context)
         if (other.get() != player)
         {
             int old = other->GetTotalStrength();
-            std::cout << "Reducing " << other->GetName() << "'s strength by 50% of " << player->GetName() << "'s strength (" << old << " -> " << (old - mod) << ")." << std::endl;
+            std::cout << "[ " << this->GetOwner()->GetName() << " ] Reducing " << other->GetName() << "'s strength by 50% of " << player->GetName() << "'s strength (" << old << " -> " << (old - mod) << ")." << std::endl;
             other->TotalStrengthAdd(-mod);
         }
     }

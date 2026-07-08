@@ -17,6 +17,6 @@ void StrengthUpEffect::Apply(GameContext* context)
     const int mod = card->GetStrength();
     const int old = player->GetTotalStrength();
 
-    std::cout << "Adding " << mod << " to player total strength (" << old << " -> " << (old + mod) << ")." << std::endl;
+    std::cout << "Adding " << mod << " to " << player->GetName() << "'s strength total (" << old << " -> " << (old + mod) << ")." << std::endl;
     player->TotalStrengthAdd(card->GetStrength());
 }

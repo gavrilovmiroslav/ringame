@@ -85,6 +85,9 @@ public:
         m_State.Consume();
     }
 
+    void PrintState();
+    void UpdateVictoryPoints();
+
     void Advance();
     void Round();
     void Run();

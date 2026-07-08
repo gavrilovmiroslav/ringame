@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 4.2)
 project(ringame)
 
 set(CMAKE_CXX_STANDARD 23)
-
 add_executable(ringame main.cpp
         core/ringbuffer.cpp
         core/ringbuffer.h
@@ -27,6 +26,11 @@ add_executable(ringame main.cpp
         gameplay/effects/onemoreturneffect.h
         gameplay/effects/reduceenemystrengtheffect.cpp
         gameplay/effects/reduceenemystrengtheffect.h
-        gameplay/effects/milldiscardeffect.cpp
-        gameplay/effects/milldiscardeffect.h
+        gameplay/effects/milldiscardstealeffect.cpp
+        gameplay/effects/milldiscardstealeffect.h
+        gameplay/effects/spawnminionseffect.cpp
+        gameplay/effects/spawnminionseffect.h
+        gameplay/ecardresolutionbehavior.h
+        gameplay/effects/spawntrapeffect.cpp
+        core/random.h
 )

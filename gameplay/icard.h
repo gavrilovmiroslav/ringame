@@ -8,6 +8,7 @@
 #include <string_view>
 #include <vector>
 #include <sys/types.h>
+#include "ecardresolutionbehavior.h"
 
 class IPlayer;
 class GameContext;
@@ -34,6 +35,11 @@ public:
         m_Strength = n;
     }
 
+    [[nodiscard]] ECardResolutionBehavior GetResolution() const
+    {
+        return m_Resolution;
+    }
+
     [[nodiscard]] std::string_view GetName() const
     {
         return m_Name;
@@ -44,6 +50,7 @@ public:
 protected:
     int m_Strength = 0;
     std::string_view m_Name;
+    ECardResolutionBehavior m_Resolution = ECardResolutionBehavior::Discard;
 };
 
 #endif //RINGAME_ICARD_H

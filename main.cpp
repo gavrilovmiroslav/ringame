@@ -6,9 +6,11 @@
 #include "gameplay/impl/cardbase.h"
 #include "gameplay/gamecontext.h"
 #include "gameplay/effects/doubletotalstrengtheffect.h"
-#include "gameplay/effects/milldiscardeffect.h"
+#include "gameplay/effects/milldiscardstealeffect.h"
 #include "gameplay/effects/onemoreturneffect.h"
 #include "gameplay/effects/reduceenemystrengtheffect.h"
+#include "gameplay/effects/spawnminionseffect.h"
+#include "gameplay/effects/spawntrapeffect.h"
 #include "gameplay/impl/humanplayer.h"
 
 int main() {
@@ -32,11 +34,14 @@ int main() {
     GameContext gameContext{2};
 
     gameContext.AddPlayer(new HumanPlayer("A", {
+        new CardBase("Heavy", 10),
         new CardBase("Double Trouble", 1, new DoubleTotalStrengthEffect()),
         new CardBase("Cutpurse", 1, new ReduceEnemyStrengthEffect()),
     }));
 
     gameContext.AddPlayer(new HumanPlayer("B", {
+        new CardBase("Necromancer", -1, new SpawnMinionsEffect(), ECardResolutionBehavior::Destroy),
+        new CardBase("Trapper", 2, new SpawnTrapEffect()),
         new CardBase("Chrono", 2, new OneMoreTurnEffect()),
         new CardBase("Graverobber", 5, new MillDiscardEffect()) }));
 

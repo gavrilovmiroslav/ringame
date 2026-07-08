@@ -53,8 +53,43 @@ void GameContext::Round()
     }
 }
 
+void GameContext::PrintState()
+{
+    std::print("    {:20}{:20}{:20}{:20}\n", "Player Name", "Total Strength", "Deck Size", "VICTORY POINTS");
+    for (auto& player : m_Players)
+    {
+        std::print("    {:20}{:14}{:15}{:15}\n",
+            player->GetName(), player->GetTotalStrength(),
+            player->GetDeck().size(), player->GetVictoryPoints());
+    }
+}
+
+void GameContext::UpdateVictoryPoints()
+{
+    int max = 0;
+    for (auto& player : m_Players)
+    {
+        if (player->GetTotalStrength() > max)
+        {
+            max = player->GetTotalStrength();
+        }
+    }
+
+    for (auto& player : m_Players)
+    {
+        if (player->GetTotalStrength() == max)
+        {
+            player->GainVictoryPoint();
+        }
+    }
+}
+
 void GameContext::Run()
 {
+    std::cout << "\n --- RINGAME IS ON! -----------------------------------------------------------------" << std::endl;
+    PrintState();
+    std::cout << " -------------------------------------------------------------------------------------\n\n" << std::endl;
+
     for (int i = 0; i < 3; i++)
     {
         m_State.Clear();
@@ -65,18 +100,21 @@ void GameContext::Run()
         }
         Round();
 
+        UpdateVictoryPoints();
+
         m_IsGameOver = false;
         for (auto& player : m_Players)
         {
             player->ShuffleDiscardIntoDeck();
         }
 
-        std::cout << "\n --------------------- ROUND " << (i + 1) << " ENDED! ------------------" << std::endl;
-        std::print("    {:20}{:20}{:20}\n", "Player Name", "Total Strength", "Deck Size");
+        std::cout << "\n --- ROUND " << (i + 1) << " ENDED! -----------------------------------------------------------------" << std::endl;
+        PrintState();
+        std::cout << " -------------------------------------------------------------------------------------\n" << std::endl;
+
         for (auto& player : m_Players)
         {
-            std::print("    {:20}{:14}{:15}\n", player->GetName(), player->GetTotalStrength(), player->GetDeck().size());
+            player->ResetStrength();
         }
-        std::cout << " -------------------------------------------------------\n" << std::endl;
     }
 }

@@ -6,11 +6,12 @@
 #include "../gamecontext.h"
 #include "../effects/strengthupeffect.h"
 
-CardBase::CardBase(std::string_view name, int strength, IEffect* effect)
+CardBase::CardBase(std::string_view name, int strength, IEffect* effect, ECardResolutionBehavior resolution)
     : ICard{name}
     , m_Owner{nullptr}
     , m_Effect{effect}
 {
+    m_Resolution = resolution;
     if (effect != nullptr)
     {
         effect->SetOwner(this);
@@ -18,11 +19,12 @@ CardBase::CardBase(std::string_view name, int strength, IEffect* effect)
     this->m_Strength = strength;
 }
 
-CardBase::CardBase(std::string_view name, IPlayer* owner, int strength, IEffect* effect)
+CardBase::CardBase(std::string_view name, IPlayer* owner, int strength, IEffect* effect, ECardResolutionBehavior resolution)
     : ICard{name}
     , m_Owner{owner}
     , m_Effect{effect}
 {
+    m_Resolution = resolution;
     if (effect != nullptr)
     {
         effect->SetOwner(this);

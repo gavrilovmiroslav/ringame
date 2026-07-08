@@ -13,6 +13,6 @@ void DoubleTotalStrengthEffect::Apply(GameContext *context)
     auto* player = this->GetOwner()->GetOwner();
 
     const int old = player->GetTotalStrength();
-    std::cout << "Doubling " << player->GetName() << "'s total strength (" << old << " -> " << (2 * old) << ")." << std::endl;
+    std::cout << "[ " << this->GetOwner()->GetName() << " ] Doubling " << player->GetName() << "'s total strength (" << old << " -> " << (2 * old) << ")." << std::endl;
     player->TotalStrengthAdd(old);
 }
