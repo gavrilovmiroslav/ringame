@@ -6,8 +6,9 @@
 #include "../gamecontext.h"
 #include "../effects/strengthupeffect.h"
 
-CardBase::CardBase(int strength, IEffect* effect)
-    : m_Owner{nullptr}
+CardBase::CardBase(std::string_view name, int strength, IEffect* effect)
+    : ICard{name}
+    , m_Owner{nullptr}
     , m_Effect{effect}
 {
     if (effect != nullptr)
@@ -17,8 +18,9 @@ CardBase::CardBase(int strength, IEffect* effect)
     this->m_Strength = strength;
 }
 
-CardBase::CardBase(IPlayer* owner, int strength, IEffect* effect)
-    : m_Owner{owner}
+CardBase::CardBase(std::string_view name, IPlayer* owner, int strength, IEffect* effect)
+    : ICard{name}
+    , m_Owner{owner}
     , m_Effect{effect}
 {
     if (effect != nullptr)

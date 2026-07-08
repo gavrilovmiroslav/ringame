@@ -20,6 +20,11 @@ public:
         return m_Deck;
     }
 
+    std::deque<ICard*>& GetDiscard()
+    {
+        return m_Discard;
+    }
+
     int GetTotalStrength() const
     {
         return m_TotalStrength;
@@ -42,7 +47,12 @@ public:
         return card;
     }
 
-    std::string_view GetName() const
+    void DiscardCard(ICard* card)
+    {
+        m_Discard.push_back(card);
+    }
+
+    [[nodiscard]] std::string_view GetName() const
     {
         return m_Name;
     }
@@ -50,6 +60,7 @@ public:
 protected:
     std::string m_Name;
     std::deque<ICard*> m_Deck;
+    std::deque<ICard*> m_Discard;
     int m_TotalStrength = 0;
 };
 

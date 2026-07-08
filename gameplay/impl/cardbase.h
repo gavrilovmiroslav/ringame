@@ -12,8 +12,8 @@ class IEffect;
 class CardBase : public ICard
 {
 public:
-    CardBase(int strength, IEffect* effect = nullptr);
-    CardBase(IPlayer* owner, int strength, IEffect* effect = nullptr);
+    CardBase(std::string_view name, int strength, IEffect* effect = nullptr);
+    CardBase(std::string_view name, IPlayer* owner, int strength, IEffect* effect = nullptr);
     ~CardBase() override = default;
 
     IPlayer* GetOwner() override;

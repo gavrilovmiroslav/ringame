@@ -23,4 +23,10 @@ add_executable(ringame main.cpp
         gameplay/effects/gameoverifemptyeffect.h
         gameplay/effects/doubletotalstrengtheffect.cpp
         gameplay/effects/doubletotalstrengtheffect.h
+        gameplay/effects/onemoreturneffect.cpp
+        gameplay/effects/onemoreturneffect.h
+        gameplay/effects/reduceenemystrengtheffect.cpp
+        gameplay/effects/reduceenemystrengtheffect.h
+        gameplay/effects/milldiscardeffect.cpp
+        gameplay/effects/milldiscardeffect.h
 )

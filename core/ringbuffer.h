@@ -19,13 +19,17 @@ public:
 
     void Push(TElement element)
     {
+#if defined(RG_DEBUG)
         std::cout << "Adding [" << element->Name() << "] to end of buffer." << std::endl;
+#endif
         m_Elements.push_back(element);
     }
 
     void PushNext(TElement element)
     {
+#if defined(RG_DEBUG)
         std::cout << "Adding [" << element->Name() << "] next in buffer." << std::endl;
+#endif
         m_Elements.insert(m_Elements.begin() + m_Current + 1, element);
     }
 
@@ -34,26 +38,44 @@ public:
         return m_Elements.empty();
     }
 
-    void Consume()
+    void Print()
     {
-        std::cout << "BEFORE: ";
+        int i = 0;
         for (auto& e : m_Elements)
         {
-            std::cout << "[" << e->Name() << "] ";
-        }
-        std::cout << std::endl;
-        assert(!m_Elements.empty());
-        m_Elements.erase(m_Elements.begin() + m_Current);
-        std::cout << "AFTER: ";
-        for (auto& e : m_Elements)
-        {
-            std::cout << "[" << e->Name() << "] ";
+            if (i == m_Current)
+                std::cout << "<" << e->Name() << "> ";
+            else
+                std::cout << "[" << e->Name() << "] ";
+
+            i++;
         }
         std::cout << std::endl;
     }
 
+    void Consume()
+    {
+#if defined(RG_DEBUG)
+        std::cout << "BEFORE: ";
+        Print();
+#endif
+        assert(!m_Elements.empty());
+        m_Elements.erase(m_Elements.begin() + m_Current);
+#if defined(RG_DEBUG)
+        std::cout << "AFTER: ";
+        Print();
+#endif
+    }
+
     TElement& Current()
     {
+        return m_Elements[m_Current];
+    }
+
+    TElement& Back()
+    {
+        m_Current--;
+        if (m_Current < 0) m_Current = m_Elements.size() - 1;
         return m_Elements[m_Current];
     }
 

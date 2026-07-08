@@ -5,6 +5,8 @@
 #ifndef RINGAME_STARTNEXTPLAYERTURN_H
 #define RINGAME_STARTNEXTPLAYERTURN_H
 
+#include <string_view>
+
 #include "../ieffect.h"
 
 struct PerformPlayerTurnEffect : public IEffect

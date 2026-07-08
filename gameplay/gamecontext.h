@@ -54,6 +54,17 @@ public:
         m_CurrentPlayer = (m_CurrentPlayer + 1) % m_PlayerCount;
     }
 
+    inline void Print(std::string_view title)
+    {
+        std::cout << title << ":" << std::endl;
+        m_State.Print();
+    }
+
+    inline void Back()
+    {
+        m_State.Back();
+    }
+
     inline void Next()
     {
         m_State.Next();

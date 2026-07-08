@@ -9,11 +9,12 @@
 
 void PerformPlayerTurnEffect::Apply(GameContext* context)
 {
-    std::cout << "Starting " << context->GetCurrentPlayer()->GetName() << "'s turn!" << std::endl;
+    std::cout << "\n### Starting " << context->GetCurrentPlayer()->GetName() << "'s turn! ###\n" << std::endl;
 
     auto& player = context->GetCurrentPlayer();
     auto* card = player->DrawCard();
 
+    std::cout << player->GetName() << " is playing " << card->GetName() << "!" << std::endl;
     if (card != nullptr)
     {
         card->Apply(context);
@@ -23,5 +24,6 @@ void PerformPlayerTurnEffect::Apply(GameContext* context)
         std::cout << "Player " << context->GetCurrentPlayer()->GetName() << "'s deck is empty, skipping!" << std::endl;
     }
 
+    player->DiscardCard(card);
     context->NextPlayer();
 }

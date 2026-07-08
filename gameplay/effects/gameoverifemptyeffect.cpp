@@ -24,6 +24,7 @@ void GameOverIfEmptyEffect::Apply(GameContext *context)
         if (!player->GetDeck().empty())
         {
             std::cout << "Player " << player->GetName() << " still has cards to draw!" << std::endl;
+            context->Print("Game Over If Empty State");
             done = false;
             break;
         }

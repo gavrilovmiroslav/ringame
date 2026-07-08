@@ -6,6 +6,9 @@
 #include "gameplay/impl/cardbase.h"
 #include "gameplay/gamecontext.h"
 #include "gameplay/effects/doubletotalstrengtheffect.h"
+#include "gameplay/effects/milldiscardeffect.h"
+#include "gameplay/effects/onemoreturneffect.h"
+#include "gameplay/effects/reduceenemystrengtheffect.h"
 #include "gameplay/impl/humanplayer.h"
 
 int main() {
@@ -27,8 +30,15 @@ int main() {
     // some of these come from the game (draw and resolve), and some come from the cards (strength up)
 
     GameContext gameContext{2};
-    gameContext.AddPlayer(new HumanPlayer("A", { new CardBase(1), new CardBase(1, new DoubleTotalStrengthEffect()) }));
-    gameContext.AddPlayer(new HumanPlayer("B", { new CardBase(2) }));
+
+    gameContext.AddPlayer(new HumanPlayer("A", {
+        new CardBase("Double Trouble", 1, new DoubleTotalStrengthEffect()),
+        new CardBase("Cutpurse", 1, new ReduceEnemyStrengthEffect()),
+    }));
+
+    gameContext.AddPlayer(new HumanPlayer("B", {
+        new CardBase("Chrono", 2, new OneMoreTurnEffect()),
+        new CardBase("Graverobber", 5, new MillDiscardEffect()) }));
 
     gameContext.Run();
 
