@@ -7,9 +7,8 @@
 #include <iostream>
 
 #include "../gamecontext.h"
-#include "../impl/cardbase.h"
 #include "../iplayer.h"
-#include "../icard.h"
+#include "../card.h"
 #include "../../core/random.h"
 
 void SpawnTrapEffect::Apply(GameContext *context)
@@ -23,7 +22,7 @@ void SpawnTrapEffect::Apply(GameContext *context)
         {
             if (other.get() != player)
             {
-                other->GetDiscard().push_back(new CardBase("Trap!", other.get(), -3));
+                other->GetDiscard().push_back(context->GetRegistry().Instantiate("Trap", other.get()));
             }
         }
     }

@@ -8,17 +8,17 @@ find_package(SDL3 REQUIRED)
 add_executable(ringame main.cpp
         core/ringbuffer.cpp
         core/ringbuffer.h
+        core/random.h
+        core/uuid.h
         gameplay/gamecontext.h
         gameplay/gamecontext.cpp
         gameplay/iplayer.h
-        gameplay/icard.h
+        gameplay/card.h
         gameplay/ieffect.h
         gameplay/impl/humanplayer.cpp
         gameplay/impl/humanplayer.h
         gameplay/effects/performplayerturneffect.cpp
         gameplay/effects/performplayerturneffect.h
-        gameplay/impl/cardbase.cpp
-        gameplay/impl/cardbase.h
         gameplay/effects/strengthupeffect.cpp
         gameplay/effects/strengthupeffect.h
         gameplay/effects/gameoverifemptyeffect.cpp
@@ -35,9 +35,12 @@ add_executable(ringame main.cpp
         gameplay/effects/spawnminionseffect.h
         gameplay/ecardresolutionbehavior.h
         gameplay/effects/spawntrapeffect.cpp
-        core/random.h
         engine/appstate.cpp
         engine/appstate.h
+        gameplay/registry.cpp
+        gameplay/registry.h
+        gameplay/card.cpp
+        gameplay/library.h
 )
 
 target_link_libraries(ringame PRIVATE SDL3::SDL3)

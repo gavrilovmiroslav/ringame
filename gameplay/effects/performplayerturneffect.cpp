@@ -15,7 +15,7 @@ void PerformPlayerTurnEffect::Apply(GameContext* context)
 #if defined(RG_DEBUG)
     int deckSize = player->GetDeck().size();
 #endif
-    auto* card = player->DrawCard();
+    auto card = player->DrawCard();
 
     if (card != nullptr)
     {

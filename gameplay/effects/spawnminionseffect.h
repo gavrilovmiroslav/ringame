@@ -15,7 +15,7 @@ struct SpawnMinionsEffect : public IEffect
     {
         m_Consumable = true;
     }
-    SpawnMinionsEffect(ICard* card) : IEffect{card}
+    SpawnMinionsEffect(Card* card) : IEffect{card}
     {
         m_Consumable = true;
     }

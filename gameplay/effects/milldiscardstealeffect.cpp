@@ -9,6 +9,10 @@
 
 void MillDiscardEffect::Apply(GameContext *context)
 {
+    assert(this != nullptr);
+    assert(this->GetOwner() != nullptr);
+    assert(this->GetOwner()->GetOwner() != nullptr);
+
     auto* player = this->GetOwner()->GetOwner();
     for (auto& other : context->GetPlayers())
     {
@@ -17,7 +21,7 @@ void MillDiscardEffect::Apply(GameContext *context)
             auto& discard = other->GetDiscard();
             if (!discard.empty())
             {
-                auto* card = discard.back();
+                auto card = discard.back();
                 std::cout << "[ " << this->GetOwner()->GetName() << " ] Stealing one card (" << card->GetName() << ") from " << other->GetName() << "'s discard pile." << std::endl;
                 discard.pop_back();
 

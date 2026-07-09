@@ -4,36 +4,30 @@
 #include <cassert>
 
 #include <SDL3/SDL_main.h>
+#include <SDL3_ttf/SDL_ttf.h>
 
 #include "engine/appstate.h"
-#include "gameplay/impl/cardbase.h"
 #include "gameplay/gamecontext.h"
-#include "gameplay/effects/doubletotalstrengtheffect.h"
-#include "gameplay/effects/milldiscardstealeffect.h"
-#include "gameplay/effects/onemoreturneffect.h"
-#include "gameplay/effects/reduceenemystrengtheffect.h"
-#include "gameplay/effects/spawnminionseffect.h"
-#include "gameplay/effects/spawntrapeffect.h"
+#include "gameplay/registry.h"
 #include "gameplay/impl/humanplayer.h"
 
+#include "gameplay/library.h"
+
 int main() {
-    GameContext gameContext{2};
+    GameContext gameContext{};
+    Registry& registry = gameContext.GetRegistry();
 
-    gameContext.AddPlayer(new HumanPlayer("A", {
-        new CardBase("Heavy", 10),
-        new CardBase("Heavy", 10),
-        new CardBase("Double Trouble", 1, new DoubleTotalStrengthEffect()),
-        new CardBase("Cutpurse", 1, new ReduceEnemyStrengthEffect()),
-    }));
+    SetupLibrary(registry);
 
-    gameContext.AddPlayer(new HumanPlayer("B", {
-        new CardBase("Necromancer", -1, new SpawnMinionsEffect(), ECardResolutionBehavior::Destroy),
-        new CardBase("Trapper", 2, new SpawnTrapEffect()),
-        new CardBase("Chrono", 2, new OneMoreTurnEffect()),
-        new CardBase("Graverobber", 5, new MillDiscardEffect()) }));
+    gameContext.AddPlayer(new HumanPlayer("A",
+        { "Heavy", "Heavy", "Double Trouble", "Cutpurse" }));
+
+    gameContext.AddPlayer(new HumanPlayer("B",
+        { "Necromancer", "Trapper", "Chrono", "Graverobber" }));
 
     gameContext.Run();
 
+    /*
     AppState state{};
     state.Init();
 
@@ -57,6 +51,7 @@ int main() {
     }
 
     SDL_Quit();
+    */
 
     return 0;
 }

@@ -6,15 +6,14 @@
 #include <utility>
 
 #include "humanplayer.h"
+#include <initializer_list>
 
-HumanPlayer::HumanPlayer(std::string name, std::vector<ICard*> deck)
+HumanPlayer::HumanPlayer(std::string name, std::initializer_list<std::string>&& deck)
 {
     m_Name = std::move(name);
 
-    for (ICard* card : deck)
+    for (auto&& card : deck)
     {
-        // TODO: leaving warning for later
-        card->SetOwner(this);
-        this->m_Deck.push_back(std::move(card));
+        m_Decklist.push_back(card);
     }
 }

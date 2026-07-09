@@ -9,7 +9,7 @@
 
 #include "../gamecontext.h"
 #include "../iplayer.h"
-#include "../icard.h"
+#include "../card.h"
 
 void ReduceEnemyStrengthEffect::Apply(GameContext *context)
 {

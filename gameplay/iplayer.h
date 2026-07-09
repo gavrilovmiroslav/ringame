@@ -10,24 +10,24 @@
 #include <random>
 #include <string>
 
-#include "icard.h"
+#include "card.h"
 
 class IPlayer
 {
 public:
-    virtual ~IPlayer() {}
+    virtual ~IPlayer() = default;
 
     void ResetStrength()
     {
         m_TotalStrength = 0;
     }
 
-    std::deque<ICard*>& GetDeck()
+    std::deque<std::shared_ptr<Card>>& GetDeck()
     {
         return m_Deck;
     }
 
-    std::deque<ICard*>& GetDiscard()
+    std::deque<std::shared_ptr<Card>>& GetDiscard()
     {
         return m_Discard;
     }
@@ -52,19 +52,19 @@ public:
         m_TotalStrength += n;
     }
 
-    ICard* DrawCard()
+    std::shared_ptr<Card> DrawCard()
     {
         if (m_Deck.empty())
         {
             return nullptr;
         }
 
-        ICard* card = m_Deck.front();
+        auto card = m_Deck.front();
         m_Deck.pop_front();
         return card;
     }
 
-    void DiscardCard(ICard* card)
+    void DiscardCard(const std::shared_ptr<Card>& card)
     {
         m_Discard.push_back(card);
     }
@@ -78,7 +78,7 @@ public:
     {
         while (!GetDiscard().empty())
         {
-            ICard* card = GetDiscard().back();
+            auto card = GetDiscard().back();
             GetDiscard().pop_back();
             GetDeck().push_back(card);
         }
@@ -90,10 +90,16 @@ public:
         return m_Name;
     }
 
+    std::vector<std::string>& GetDecklist()
+    {
+        return m_Decklist;
+    }
+
 protected:
+    std::vector<std::string> m_Decklist;
     std::string m_Name;
-    std::deque<ICard*> m_Deck;
-    std::deque<ICard*> m_Discard;
+    std::deque<std::shared_ptr<Card>> m_Deck;
+    std::deque<std::shared_ptr<Card>> m_Discard;
     int m_TotalStrength = 0;
     int m_VictoryPoints = 0;
 };

@@ -5,7 +5,7 @@
 #ifndef RINGAME_IEFFECT_H
 #define RINGAME_IEFFECT_H
 
-class ICard;
+class Card;
 class GameContext;
 
 class IEffect
@@ -13,14 +13,14 @@ class IEffect
 public:
     IEffect() = default;
 
-    IEffect(ICard* owner)
+    IEffect(Card* owner)
         : m_Owner{owner}
     {}
 
     virtual ~IEffect() = default;
 
-    void SetOwner(ICard* card) { m_Owner = card; }
-    ICard* GetOwner() { return m_Owner; }
+    void SetOwner(Card* card) { m_Owner = card; }
+    Card* GetOwner() { return m_Owner; }
     virtual void Apply(GameContext* context) = 0;
 
     virtual std::string_view Name() { return "IEffect"; };
@@ -31,7 +31,7 @@ public:
     }
 protected:
     bool m_Consumable = false;
-    ICard* m_Owner{nullptr};
+    Card* m_Owner{nullptr};
 };
 
 #endif //RINGAME_IEFFECT_H

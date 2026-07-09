@@ -10,7 +10,7 @@
 struct StrengthUpEffect : public IEffect
 {
     StrengthUpEffect() = delete;
-    StrengthUpEffect(ICard* card) : IEffect{card}
+    StrengthUpEffect(Card* card) : IEffect{card}
     {
         m_Consumable = true;
     }

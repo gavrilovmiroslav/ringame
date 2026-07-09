@@ -6,9 +6,9 @@
 
 #include <iostream>
 
-#include "../impl/cardbase.h"
+#include "../gamecontext.h"
 #include "../iplayer.h"
-#include "../icard.h"
+#include "../card.h"
 
 void SpawnMinionsEffect::Apply(GameContext *context)
 {
@@ -19,6 +19,6 @@ void SpawnMinionsEffect::Apply(GameContext *context)
 
     for (int i = 0; i < count; i++)
     {
-        player->GetDiscard().push_back(new CardBase("Minion", player, 1));
+        player->GetDiscard().push_back(context->GetRegistry().Instantiate("Minion", player));
     }
 }

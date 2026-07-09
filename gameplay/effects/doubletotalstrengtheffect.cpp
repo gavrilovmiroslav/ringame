@@ -5,11 +5,15 @@
 #include "doubletotalstrengtheffect.h"
 
 #include "../iplayer.h"
-#include "../icard.h"
+#include "../card.h"
 #include "../gamecontext.h"
+#include <cassert>
 
 void DoubleTotalStrengthEffect::Apply(GameContext *context)
 {
+    assert(this != nullptr);
+    assert(this->GetOwner() != nullptr);
+    assert(this->GetOwner()->GetOwner() != nullptr);
     auto* player = this->GetOwner()->GetOwner();
 
     const int old = player->GetTotalStrength();

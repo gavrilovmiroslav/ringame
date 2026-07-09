@@ -10,13 +10,15 @@
 
 #include "../core/ringbuffer.h"
 #include "../gameplay/ieffect.h"
+#include "../gameplay/registry.h"
 
 class IPlayer;
+
 
 class GameContext
 {
 public:
-    GameContext(int playerCount);
+    GameContext(int playerCount = 2);
     void AddPlayer(IPlayer* player);
 
     inline int GetPlayerCount() const
@@ -39,14 +41,26 @@ public:
         return std::span{m_Players};
     }
 
-    inline int GetCurrentPlayerIndex() const
+    int GetCurrentPlayerIndex() const
     {
         return m_CurrentPlayer;
     }
 
-    inline std::unique_ptr<IPlayer>& GetCurrentPlayer()
+    int GetOtherPlayerIndex() const
+    {
+        assert(m_PlayerCount == 2);
+        return 1 - m_CurrentPlayer;
+    }
+
+    std::unique_ptr<IPlayer>& GetCurrentPlayer()
     {
         return m_Players[m_CurrentPlayer];
+    }
+
+    std::unique_ptr<IPlayer>& GetOtherPlayer()
+    {
+        assert(m_PlayerCount == 2);
+        return m_Players[GetOtherPlayerIndex()];
     }
 
     inline void NextPlayer()
@@ -54,7 +68,7 @@ public:
         m_CurrentPlayer = (m_CurrentPlayer + 1) % m_PlayerCount;
     }
 
-    inline void Print(std::string_view title)
+    inline void Print(const std::string& title)
     {
         std::cout << title << ":" << std::endl;
         m_State.Print();
@@ -85,6 +99,16 @@ public:
         m_State.Consume();
     }
 
+    inline const Registry& GetRegistry() const
+    {
+        return m_Registry;
+    }
+
+    inline Registry& GetRegistry()
+    {
+        return m_Registry;
+    }
+
     void PrintState();
     void UpdateVictoryPoints();
 
@@ -98,6 +122,7 @@ private:
     int m_CurrentPlayer = 0;
     std::vector<std::unique_ptr<IPlayer>> m_Players;
     RingBuffer<IEffect*> m_State;
+    Registry m_Registry{};
 };
 
 

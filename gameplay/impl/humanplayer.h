@@ -10,8 +10,8 @@
 class HumanPlayer : public IPlayer
 {
 public:
-    HumanPlayer(std::string name, std::vector<ICard*> deck);
-    ~HumanPlayer() override {}
+    HumanPlayer(std::string name, std::initializer_list<std::string>&& deck);
+    ~HumanPlayer() override = default;
 };
 
 

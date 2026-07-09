@@ -15,7 +15,7 @@ struct DoubleTotalStrengthEffect : public IEffect
     {
         m_Consumable = true;
     }
-    DoubleTotalStrengthEffect(ICard* card) : IEffect{card}
+    DoubleTotalStrengthEffect(Card* card) : IEffect{card}
     {
         m_Consumable = true;
     }

@@ -16,7 +16,15 @@ GameContext::GameContext(int playerCount)
 
 void GameContext::AddPlayer(IPlayer* player)
 {
-    m_Players.push_back(std::unique_ptr<IPlayer>(player));
+    assert(m_Players.size() < m_PlayerCount);
+    auto instance = std::unique_ptr<IPlayer>(player);
+    for (auto& cardName : instance->GetDecklist())
+    {
+        auto card = m_Registry.Instantiate(cardName, instance.get());
+        assert(card != nullptr);
+        instance->GetDeck().push_back(card);
+    }
+    m_Players.push_back(std::move(instance));
 }
 
 void GameContext::Advance()

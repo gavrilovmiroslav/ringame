@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#include "../icard.h"
+#include "../card.h"
 #include "../iplayer.h"
 #include "../gamecontext.h"
 #include "strengthupeffect.h"
